@@ -20,7 +20,7 @@ Check the URL: http://0.0.0.0:8000/test_app/v1/projects/
 ```
 # Open terminal and run the server on current folder using following command
 
-$ python -m http.server 80
+python -m http.server 80
 
 Then open index.html from the http://localhost:80
 ```
@@ -51,12 +51,12 @@ python utilities/load_csv_into_db.py -file_path test_app/data_source/WTG_raw_tab
 ### Run DB Migrations
 
 ```
-$ python3.10 manage.py makemigrations
+python3.10 manage.py makemigrations
 
-$ python3.10 manage.py migrate
+python3.10 manage.py migrate
 
-$ python3.10 manage.py createcachetable
+python3.10 manage.py createcachetable
 
-$ python3.10 manage.py createsuperuser
+python3.10 manage.py createsuperuser
 
 ```
