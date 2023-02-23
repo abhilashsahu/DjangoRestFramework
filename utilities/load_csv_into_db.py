@@ -15,7 +15,7 @@ import numpy as np
 from django.db import transaction
 
 # Below code snippet sets the context to this Django Project
-proj_path = "../TestProject"
+proj_path = "./"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TestProject.settings")
 sys.path.append(proj_path)
 
