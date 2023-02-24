@@ -5,9 +5,9 @@
 ```
 git clone git@github.com:abhilashsahu/DjangoRestFramework.git
 
-docker-compose run web python3.10 manage.py createcachetable
-
 docker-compose run web python3.10 manage.py migrate #migrate django db inside container
+
+docker-compose run web python3.10 manage.py createcachetable
 
 docker-compose up
 

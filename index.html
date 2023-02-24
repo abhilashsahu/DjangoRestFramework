@@ -240,20 +240,8 @@
 
 	function api_post_data() {
 		serverConfig = get_server_configs()
-		let newProject = {
-			'id': $("#add_id").val(),
-			'project_name': $("#add_project_name").val(),
-			'project_number': $("#add_project_number").val(),
-			'acquisition_date': $("#add_acquisition_date").val(),
-			'number_3l_code': $("#add_number_3l_code").val(),
-			'project_deal_type_id': $("#add_project_deal_type_id").val(),
-			'project_group_id': $("#add_project_group_id").val(),
-			'project_status_id': $("#add_project_status_id").val(),
-			'company_id': $("#add_company_id").val(),
-			'project_deal_type_id': $("#add_project_deal_type_id").val(),
-			'project_group_id': $("#add_project_group_id").val(),
-			'project_status_id': $("#add_project_status_id").val(),
-		}
+        let [id, projectName, projectNumber, acquisitionDate, number3lCode, projectDealTypeId, projectGroupId, projectStatusId, companyId] = [$("#add_id").val(), $("#add_project_name").val(), $("#add_project_number").val(), $("#add_acquisition_date").val(), $("#add_number_3l_code").val(), $("#add_project_deal_type_id").val(), $("#add_project_group_id").val(),  $("#add_project_status_id").val(), $("#add_company_id").val()]
+		let newProject = get_valid_json_input(id, projectName, projectNumber, acquisitionDate, number3lCode, projectDealTypeId, projectGroupId, projectStatusId, companyId);
 		fetch(serverConfig['HOST'] + 'projects/', {
 			method: 'POST',
 			headers: serverConfig['REQUEST_HEADER'],
@@ -268,22 +256,9 @@
 
 	function api_put_data() {
 		let serverConfig = get_server_configs()
-		let update_project_id = $("#update_id").val()
-		let updatedProject = {
-			'id': update_project_id,
-			'project_name': $("#update_project_name").val(),
-			'project_number': $("#update_project_number").val(),
-			'acquisition_date': $("#update_acquisition_date").val(),
-			'number_3l_code': $("#update_number_3l_code").val(),
-			'project_deal_type_id': $("#update_project_deal_type_id").val(),
-			'project_group_id': $("#update_project_group_id").val(),
-			'project_status_id': $("#update_project_status_id").val(),
-			'company_id': $("#update_company_id").val(),
-			'project_deal_type_id': $("#update_project_deal_type_id").val(),
-			'project_group_id': $("#update_project_group_id").val(),
-			'project_status_id': $("#update_project_status_id").val(),
-		}
-		fetch(serverConfig['HOST'] + 'project/' + update_project_id, {
+        let [id, projectName, projectNumber, acquisitionDate, number3lCode, projectDealTypeId, projectGroupId, projectStatusId, companyId] = [$("#update_id").val(), $("#update_project_name").val(), $("#update_project_number").val(), $("#update_acquisition_date").val(), $("#update_number_3l_code").val(), $("#update_project_deal_type_id").val(), $("#update_project_group_id").val(),  $("#update_project_status_id").val(), $("#update_company_id").val()]
+        let updatedProject = get_valid_json_input(id, projectName, projectNumber, acquisitionDate, number3lCode, projectDealTypeId, projectGroupId, projectStatusId, companyId);
+		fetch(serverConfig['HOST'] + 'project/' + id, {
 			method: 'PUT',
 			headers: serverConfig['REQUEST_HEADER'],
 			body: JSON.stringify(updatedProject)
@@ -310,6 +285,38 @@
 	function prepare_deletion(clicked_id) {
 		$("#delete_id").val(clicked_id);
 	}
+
+    function get_valid_json_input(id, projectName, projectNumber, acquisitionDate, number3lCode, projectDealTypeId, projectGroupId, projectStatusId, companyId) {
+        if(!(id && projectName && projectNumber && projectDealTypeId && projectGroupId && projectStatusId)) {
+            errorMessage = "Error!! All these fields('id', 'projectName', 'projectNumber', 'projectDealTypeId', 'projectGroupId', 'projectStatusId') are required.";
+            throw_error(errorMessage)
+        }
+        if(isNaN(id)) {
+            errorMessage = "Error!! Field 'id' has to be a number.";
+            throw_error(errorMessage)
+        }
+        if(number3lCode.length > 3) {
+            errorMessage = "Error!! Field 'number_3l_code' can't be more than 3 letters";
+            throw_error(errorMessage)
+        }
+        return {
+			'id': id,
+			'project_name': projectName,
+			'project_number': projectNumber,
+			'acquisition_date': acquisitionDate,
+			'number_3l_code': number3lCode,
+			'project_deal_type_id': projectDealTypeId,
+			'project_group_id': projectGroupId,
+			'project_status_id':projectStatusId,
+			'company_id': companyId,
+		}
+    }
+
+    function throw_error(errorMessage) {
+        alert(errorMessage);
+        throw new Error(errorMessage);
+    }
+
 	// Datapicker library for Dat fields
 	$(function() {
 		$("#datepicker1").datepicker({
