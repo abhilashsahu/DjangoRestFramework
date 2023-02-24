@@ -1,7 +1,6 @@
 # TestProject
 
-## Running with docker
-
+### Deploy the backend instance using docker
 ```
 git clone git@github.com:abhilashsahu/DjangoRestFramework.git
 
@@ -16,6 +15,16 @@ Check the URL: http://0.0.0.0:8000/test_app/v1/projects/
 
 ```
 
+### Load the data into DB
+```
+# Open a termimnal, traverse to prject directory and execute the folling commands to import data from csv
+
+python utilities/load_csv_into_db.py -file_path test_app/data_source/Project_raw_table.csv -model project
+
+python utilities/load_csv_into_db.py -file_path test_app/data_source/WTG_raw_table.csv -model wtg
+
+```
+
 ### Run the User Interface
 ```
 # Open terminal and run the server on current folder using following command
@@ -23,17 +32,9 @@ Check the URL: http://0.0.0.0:8000/test_app/v1/projects/
 python -m http.server 80
 
 Then open index.html from the http://localhost:80
+
 ```
 
-
-### Import the CSV Data to django models
-```
-# Open a termimnal and execute the folling commands to import data from csv
-
-python utilities/load_csv_into_db.py -file_path test_app/data_source/Project_raw_table.csv -model project
-
-python utilities/load_csv_into_db.py -file_path test_app/data_source/WTG_raw_table.csv -model wtg
-```
 
 ### Developed and Tested using below backend tools, technologies, frameworks or modules:
 ```
@@ -45,11 +46,12 @@ python utilities/load_csv_into_db.py -file_path test_app/data_source/WTG_raw_tab
     djangorestframework: 3.14.0
     drf-api-logger: 1.1.2
     pands: 1.5.3
+    Jquery, Bootstrap, JavaScript fetch, etc
+ 
 ```
 
 
 ### Run DB Migrations
-
 ```
 python3.10 manage.py makemigrations
 
