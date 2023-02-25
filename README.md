@@ -17,7 +17,7 @@ Check the URL: http://0.0.0.0:8000/test_app/v1/projects/
 
 ### Load the data into DB
 ```
-# Open a termimnal, traverse to prject directory and execute the folling commands to import data from csv
+# Open a termimnal, traverse to project directory and execute the folling commands to import data from csv
 
 python utilities/load_csv_into_db.py -file_path test_app/data_source/Project_raw_table.csv -model project
 
@@ -27,7 +27,7 @@ python utilities/load_csv_into_db.py -file_path test_app/data_source/WTG_raw_tab
 
 ### Run the User Interface
 ```
-# Open terminal and run the server on current folder using following command
+# Open a termimnal, traverse to project directory and run the server for frontent using following command
 
 python -m http.server 80
 
